@@ -1,13 +1,36 @@
 package org.ravi;
 
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 @DisplayName("Tests Calculator App")
 class CalculatorAppTest {
-    CalculatorApp calculatorApp = new CalculatorApp();
+
+
+    CalculatorApp calculatorApp;
+    @BeforeAll
+    static void setup() {
+        System.out.println("Executing @BeforeAll method.");
+    }
+
+    @AfterAll
+    static void cleanup() {
+        System.out.println("Executing @AfterAll method.");
+    }
+
+    @BeforeEach
+    void beforeEach() {
+        calculatorApp = new CalculatorApp();
+        System.out.println("Executing @BeforeEach method");
+    }
+
+    @AfterEach
+    void afterEach() {
+        System.out.println("Executing @AfterEach method");
+    }
+
+
 
     @DisplayName("Test 8/2 = 4")
     @Test
