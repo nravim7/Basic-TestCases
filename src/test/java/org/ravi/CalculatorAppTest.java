@@ -31,11 +31,26 @@ class CalculatorAppTest {
     }
 
 
-
     @DisplayName("Test 8/2 = 4")
     @Test
     void testIntegerDivision_WhenEightIsDividedByTwo_ShouldReturnFour() {
         assertEquals(4, calculatorApp.integerDivision(8,2), "divisionMethod Failed");
+    }
+
+    @Test
+    void testIntegerDivision_WhenIntegerIsDividedByZero_ShouldThrowError() {
+        //Arrange
+        int dividend = 4;
+        int divisor = 0;
+        String expectedExceptionMessage = "/ by zero";
+
+        //Act & Assert
+        ArithmeticException actualException = assertThrows(ArithmeticException.class, ()->
+                calculatorApp.integerDivision(dividend,divisor), "Division by Zero should have Thrown Exception");
+
+
+        //Assert
+        assertEquals(expectedExceptionMessage, actualException.getMessage(), "Unexpected exception");
     }
 
     @DisplayName("Test 4-2 =2")
