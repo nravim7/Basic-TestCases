@@ -3,6 +3,7 @@ package org.ravi;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.MethodSource;
 
 import java.util.stream.Stream;
@@ -60,18 +61,23 @@ class CalculatorAppTest {
 
     @DisplayName("Test for Integer Subtraction")
     @ParameterizedTest
-    @MethodSource("sourceMethodForSubtraction")
+    //@MethodSource("sourceMethodForSubtraction")
+    @CsvSource({
+            "32,1,31",
+            "45,2,43",
+            "65,1,64"
+    })
     void integerSubtraction(int minuend, int subtrahend, int expectedResult) {
         System.out.println("Running test for "+minuend+"-"+subtrahend+"="+expectedResult);
         assertEquals(expectedResult, calculatorApp.integerSubtraction(minuend, subtrahend), "Subtraction Method failed");
     }
 
-    private static Stream<Arguments> sourceMethodForSubtraction() {
+  /*  private static Stream<Arguments> sourceMethodForSubtraction() {
         return Stream.of(
                 Arguments.of(31,1,30),
                 Arguments.of(41,1,40),
                 Arguments.of(51,1,50)
 
         );
-    }
+    }*/
 }
