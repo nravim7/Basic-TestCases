@@ -1,6 +1,11 @@
 package org.ravi;
 
 import org.junit.jupiter.api.*;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
+
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -53,9 +58,20 @@ class CalculatorAppTest {
         assertEquals(expectedExceptionMessage, actualException.getMessage(), "Unexpected exception");
     }
 
-    @DisplayName("Test 4-2 =2")
-    @Test
-    void integerSubtraction() {
-        assertEquals(2, calculatorApp.integerSubtraction(4,2), "Subtraction Method failed");
+    @DisplayName("Test for Integer Subtraction")
+    @ParameterizedTest
+    @MethodSource("sourceMethodForSubtraction")
+    void integerSubtraction(int minuend, int subtrahend, int expectedResult) {
+        System.out.println("Running test for "+minuend+"-"+subtrahend+"="+expectedResult);
+        assertEquals(expectedResult, calculatorApp.integerSubtraction(minuend, subtrahend), "Subtraction Method failed");
+    }
+
+    private static Stream<Arguments> sourceMethodForSubtraction() {
+        return Stream.of(
+                Arguments.of(31,1,30),
+                Arguments.of(41,1,40),
+                Arguments.of(51,1,50)
+
+        );
     }
 }
